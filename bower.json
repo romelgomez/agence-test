@@ -1,0 +1,20 @@
+{
+  "name": "agence2",
+  "description": "",
+  "main": "app/public/index.html",
+  "authors": [
+    "Romel Gomez <bmxquiksilver7185@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.97.8"
+  }
+}
