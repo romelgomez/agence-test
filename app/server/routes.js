@@ -5,10 +5,10 @@ var Routes = (function () {
     function Routes(NODE_ENV) {
         switch (NODE_ENV) {
             case 'production':
-                this.basePath = '/dist';
+                this.basePath = '/app/dist';
                 break;
             case 'development':
-                this.basePath = '/public';
+                this.basePath = '/app/public';
                 break;
         }
         this.api = new database.API({
@@ -28,6 +28,24 @@ var Routes = (function () {
         });
         app.get('/consultants-list', function (req, res) {
             _this.api.consultantsList()
+                .then(function (result) {
+                res.send(result);
+            })
+                .catch(function (err) {
+                res.redirect('/error');
+            });
+        });
+        app.get('/report/:co_usuario/:date_interval_start/:date_interval_end', function (req, res) {
+            _this.api.report(req.params.co_usuario, { start: req.params.date_interval_start, end: req.params.date_interval_end })
+                .then(function (result) {
+                res.send(result);
+            })
+                .catch(function (err) {
+                res.redirect('/error');
+            });
+        });
+        app.get('/report/:co_usuario', function (req, res) {
+            _this.api.salary(req.params.co_usuario)
                 .then(function (result) {
                 res.send(result);
             })

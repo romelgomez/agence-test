@@ -13,12 +13,13 @@ export class Routes {
 
     switch(NODE_ENV) {
       case 'production':
-        this.basePath = '/dist';
+        this.basePath = '/app/dist';
         break;
       case 'development':
-        this.basePath = '/public';
+        this.basePath = '/app/public';
         break;
     }
+
 
     this.api = new database.API({
       host     : 'localhost',
@@ -48,6 +49,30 @@ export class Routes {
           .catch((err)=>{
             res.redirect('/error');
           })
+
+    });
+
+    app.get('/report/:co_usuario/:date_interval_start/:date_interval_end',(req: express.Request, res: express.Response)=>{
+
+        this.api.report(req.params.co_usuario,{start:req.params.date_interval_start, end:req.params.date_interval_end})
+          .then((result)=>{
+            res.send(result);
+          })
+          .catch((err)=>{
+            res.redirect('/error');
+          });
+
+    });
+
+    app.get('/report/:co_usuario',(req: express.Request, res: express.Response)=>{
+
+        this.api.salary(req.params.co_usuario)
+          .then((result)=>{
+            res.send(result);
+          })
+          .catch((err)=>{
+            res.redirect('/error');
+          });
 
     });
 

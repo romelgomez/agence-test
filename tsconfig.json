@@ -10,5 +10,8 @@
     "noImplicitAny": false,
     "rootDir": "./src",
     "outDir": "./app"
-  }
+  },
+  "exclude":[
+    "node_modules"
+  ]
 }
